@@ -1,0 +1,15 @@
+{
+    "name": "root/lms-mvc",
+    "autoload": {
+        "psr-4": {
+            "src\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "rujulnipane",
+            "email": "rujulnipane2002@gmail.com"
+        }
+    ],
+    "require": {}
+}
