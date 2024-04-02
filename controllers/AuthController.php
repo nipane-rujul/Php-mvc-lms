@@ -3,8 +3,13 @@
 namespace src\controllers;
 use src\core\Application;
 use src\models\User;
+use src\core\Session;
 
 class AuthController extends Controller{
+
+    public function __construct(){
+        // parent::$layout = 'auth';
+    }
 
     public function home(){
         $this->render('home',["style" => 'home.css', "title" => "home"]);
@@ -13,18 +18,17 @@ class AuthController extends Controller{
 
         if(Application::$app->request->getMethod() == 'POST'){
             $data = Application::$app->request->getBody();
-            // var_dump($data);
             try{
                 $user = User::getUser(array("username"=> $data["username"]));
             }
             catch(\Exception $e){
-                
-                // $_SESSION['error'] = $e->getMessage();
                 exit;
             }
             
             if($user->num_rows == 0){
-                $this->render('login',["error" => "Invalid username or password"]);
+                $error = ['message' => 'Invalid username or password', 'data' => $data];
+                $this->setError($error);
+                Application::$app->response->redirect('login'); 
                 exit;
             }
             else{
@@ -34,13 +38,16 @@ class AuthController extends Controller{
                     $this->render('home');
                 }
                 else{
-                    $this->render('login',['style' => 'login.css', 'title' => "Login"],["error" => "Invalid username or password"]);
+                    $error = ['message' => 'Invalid username or password', 'data' => $data];
+                    $this->setError($error);
+                    Application::$app->response->redirect('login');
                 }
                 
             }
             // echo "hello";
         }
         else{
+            $this->layout = 'auth';
             $this->render('login',['style' => 'login.css', 'title' => "Login"]);
         }
     }
@@ -49,7 +56,7 @@ class AuthController extends Controller{
 
         if(Application::$app->request->getMethod() == 'POST'){
             $data = Application::$app->request->getBody();
-            // var_dump($data);
+            
             try{
                 $userbyemail = User::getUser(array("email"=> $data['email']));
             }
@@ -62,21 +69,18 @@ class AuthController extends Controller{
             }
             catch(\Exception $e){
                 // header('Location: '. "../views/Login.php");
-                $_SESSION['error'] = $e->getMessage();
+                // $_SESSION['error'] = $e->getMessage();
             }
             if ($userbyname->num_rows > 0) {
-                // $_SESSION['error'] = "Username already exists";
-                // $_SESSION['details'] = array('username'=> $this->username, 'email' => $this->email);
-                $this->render('register',['style'=>'login.css', 'title' => 'Register']);
-                // header('Location: '. "../views/Registration.php");
+                $error = ['message' => 'Username already exists', 'data' => $data];
+                $this->setError($error);
+                Application::$app->response->redirect('register');   
                 exit;
             } 
-            else if($userbyemail->num_rows > 0){
-                // $_SESSION['error'] = "Email already exists";
-                $this->render('register',['style'=>'login.css', 'title' => 'Register']);
-                // $_SESSION['details'] = array('username'=> $this->username, 'email' => $this->email);
-                // $this->render('register',['style'=>'login.css', 'title' => 'Register']);
-                // header('Location: '. "../views/Registration.php");
+            else if($userbyemail->num_rows > 0){ 
+                $error = ['message' => 'Email already exists', 'data' => $data];
+                $this->setError($error);
+                Application::$app->response->redirect('register');
                 exit;
             }else {
                 // create new user 
@@ -92,9 +96,7 @@ class AuthController extends Controller{
                 );
                 try{
                     User::createUser($array);
-                    // $_SESSION['success'] = "User Created Successfully.";
-                    // header('Location: ' . "../views/Login.php");
-                    $this->render('login');
+                    Application::$app->response->redirect('login');
                 }
                 catch(\Exception $e){
                     $_SESSION['error'] = $e->getMessage();
@@ -103,7 +105,15 @@ class AuthController extends Controller{
             }
         }
         else{
+            $this->layout = 'auth';
             $this->render('register',['style' => 'login.css', "title" => "Register"]);
         }
+    }
+
+    public function logout(){
+        $this->layout = 'auth';
+        Application::$app->session->remove('user');
+        Application::$app->session->deleteSession();
+        Application::$app->response->redirect('login');
     }
 }
