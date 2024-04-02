@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <div class="container mt-4" style="min-height:90vh">
     <div class="py-3 text-center">
         <!-- <img class="d-block mx-auto mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"> -->
@@ -16,8 +20,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-user"></i></span>
                         </div>
-                        <input name="username" id="name" type="text" class="form-control" placeholder="Enter Username" required value=<?php echo $userdetails['username']; ?>>
+                        <input name="username" id="name" type="text" class="form-control" placeholder="Enter Username" required value=<?php echo $data['username']; ?>>
                         <div id="nameError" class="invalid-feedback">
+                            
                         </div>
                     </div>
                 </div>
@@ -27,7 +32,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                         </div>
-                        <input name="email" id="email" type="text" class="form-control" placeholder="Enter Email" required value=<?php echo $userdetails['email']; ?>>
+                        <input name="email" id="email" type="text" class="form-control" placeholder="Enter Email" required value=<?php echo $data['email']; ?>>
                         <div id="emailError" class="invalid-feedback">
                         </div>
                     </div>
@@ -55,9 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <?php if (isset($error_message)) : ?>
-                    <p class="text-center" style="color: red;"><?php echo htmlspecialchars($error_message); ?></p>
-                <?php endif; ?>
+                <?php echo $message?>
                 <hr class="mb-2">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
                 <p class="text-center">Have an account? <a href="login">Login</a> </p>

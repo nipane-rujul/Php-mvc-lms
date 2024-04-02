@@ -2,12 +2,16 @@
     <div class="container">
       <h1 class="jumbotron-heading">Welcome to the Learning Platform</h1>
       <p class="lead text-muted">We have the most wide ranges of free courses. You can access the free videos.</p>
-      
+      <?php
+
+use src\core\Application;
+
+ if (Application::$app->isAdmin()) : ?>
         <p>
-          <a href="createCourse.php" class="btn btn-primary my-2">Create Course</a>
+          <a href="/CreateCourse" class="btn btn-primary my-2">Create Course</a>
         </p>
     </div>
-  
+  <?php endif; ?>
   </section>
 
   <div class="album py-3">
