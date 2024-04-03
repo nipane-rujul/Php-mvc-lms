@@ -143,7 +143,11 @@ $(document).ready(function () {
                 id: course_id
             }, function (res, status) {
                 console.log(res);
+<<<<<<< HEAD
                 window.location.href = "/";
+=======
+                // window.location.href = "Courses.php";
+>>>>>>> origin/master
             },
                 'json').fail(function (xhr, status, error) {
                     console.log(error);

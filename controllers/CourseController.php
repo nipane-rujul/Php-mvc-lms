@@ -20,6 +20,7 @@ class CourseController extends Controller{
     public function home(){
         $this->render('home',["style" => 'home.css', "title" => "home"]);
     }
+
     public function course(){
         $this->render('course');
     }
