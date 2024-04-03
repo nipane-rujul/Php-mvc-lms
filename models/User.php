@@ -15,13 +15,6 @@ class User{
     public static function Login($row, $password){
         if (password_verify($password, $row["password"])) {
             Application::$app->session->set('user', ['username' => $row['username'], 'userId' => $row['id'], 'isAdmin' => $row['isAdmin']]);
-            // $_SESSION['username'] = $row['username'];
-            // $_SESSION['userId'] = $row['id'];
-            // if ($row['isAdmin'] === "yes") {
-            //     $_SESSION['isAdmin'] = true;
-            // } else {
-            //     $_SESSION['isAdmin'] = false;
-            // }
             return true;
         }
         return false;
