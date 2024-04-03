@@ -18,15 +18,11 @@ class Application{
         $this->response = new Response();
         $this->db = Database::getInstance($config['db']);
         $this->session = new Session();
-        // echo "here";
         self::$app = $this;
         self::$app->db->getConnection();
-        // echo "here";
-        
     }
 
     public function run(){
-        // echo "here";
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
         $this->router->disPatch($method,$path);
@@ -45,5 +41,11 @@ class Application{
             return true;
         }
         return false;
+    }
+
+    public function getName(){
+        $user = $this->session->get('user');
+        if($user['isAdmin'] == 'yes') return "Admin";
+        return $user['username'];
     }
 }

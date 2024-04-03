@@ -1,3 +1,8 @@
+<?php
+use src\core\Application;
+$username = Application::$app->getName();
+?>
+
 <header class="p-2 bg-dark border-bottom">
 <div class="container">
   <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -13,7 +18,7 @@
 
     <div class="dropdown text-end">
       <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <!-- <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle"> --><?= $user ?>
+        <?php echo $username ?>
       </a>
       <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
         

@@ -8,7 +8,7 @@ class Session{
     }
 
     public function setFlash(){
-
+        
     }
 
     public function getFlash(){

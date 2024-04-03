@@ -11,9 +11,7 @@ class AuthController extends Controller{
         // parent::$layout = 'auth';
     }
 
-    public function home(){
-        $this->render('home',["style" => 'home.css', "title" => "home"]);
-    }
+    
     public function login(){
 
         if(Application::$app->request->getMethod() == 'POST'){
@@ -35,7 +33,7 @@ class AuthController extends Controller{
                 // login the user by verifying password
                 $row = $user->fetch_assoc();
                 if(User::Login($row,$data["password"])){
-                    $this->render('home');
+                    Application::$app->response->redirect('');
                 }
                 else{
                     $error = ['message' => 'Invalid username or password', 'data' => $data];

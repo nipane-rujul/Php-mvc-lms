@@ -10,6 +10,16 @@ class CourseController extends Controller{
     public $course;
     public $sections = [];
     public $videos = [];
+
+    public function __construct(){
+        if(!Application::$app->isLogin()){
+            Application::$app->response->redirect('login');
+        }
+    }
+
+    public function home(){
+        $this->render('home',["style" => 'home.css', "title" => "home"]);
+    }
     public function course(){
         $this->render('course');
     }

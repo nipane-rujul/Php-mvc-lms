@@ -143,7 +143,7 @@ $(document).ready(function () {
                 id: course_id
             }, function (res, status) {
                 console.log(res);
-                // window.location.href = "Courses.php";
+                window.location.href = "/";
             },
                 'json').fail(function (xhr, status, error) {
                     console.log(error);
@@ -169,12 +169,10 @@ $(document).ready(function () {
         }
         var sectionId = $('#sectionIdInput').val();
         let videotitle = $('#video-t').val();
-        // console.log(videotitle);
-        // console.log(sectionId);
         formData.append('sectionId', sectionId);
         formData.append('courseId', courseId);
         formData.append('video-title', videotitle);
-        // console.log(formData);
+
         $.ajax({
             url: "addVideo",
             type: "POST",
