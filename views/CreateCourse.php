@@ -11,8 +11,7 @@
                             <span class="input-group-text"><i class="fa fa-graduation-cap"></i></span>
                         </div>
                         <input type="text" name="courseTitle" class="form-control" id="courseTitle" name="courseTitle" required>
-                        <!-- <div id="usernameError" class="invalid-feedback" style="width: 100%;">
-                        </div> -->
+                       
                     </div>
                 </div>
 
@@ -23,8 +22,7 @@
                             <!-- <span class="input-group-text"><i class="fa fa-lock"></i></span> -->
                         </div>
                         <textarea class="form-control" name="courseDes" id="courseDescription" name="courseDescription" rows="5" required></textarea>
-                        <!-- <div id="passwordError" class="invalid-feedback">
-                        </div> -->
+                        
                     </div>
                 </div>
                 

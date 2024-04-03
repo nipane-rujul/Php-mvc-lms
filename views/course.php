@@ -44,15 +44,11 @@ use src\core\Application;
             <div class="px-4 py-2 d-flex flex-row align-items-center">
                 <h6 class="mt-2 font-weight-bold text-primary" id="video-title"></h6>
 
-                <!-- </div> -->
             </div>
             <div class="row justify-content-center">
 
                 <div class="col-xl-12 col-lg-7">
                     <div class="">
-                        <!-- <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" id="video-item" src=""></iframe>
-                        </div> -->
                         <div class="p-2 d-flex justify-content-center">
                             <video controls autoplay id="video-item" class="video-item border rounded" style="width: 80%;">
 

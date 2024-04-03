@@ -10,7 +10,6 @@ $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 // echo "here";
 $config = [
-    // 'userClass' => \app\models\User::class,
     'db' => [
         'server' => $_ENV['DB_SERVER'],
         'dbuser' => $_ENV['DB_USER'],
@@ -18,8 +17,6 @@ $config = [
         'dbname' => $_ENV['DB_NAME']
     ]
 ];
-
-// echo 'here';
 
 $app = new Application($config);
 $app->router->get('/',[CourseController::class,'home']);
@@ -39,5 +36,5 @@ $app->router->post('/addSection',[AdminController::class,'addSection']);
 $app->router->post('/addVideo',[AdminController::class,'addVideo']);
 $app->router->post('/deleteCourse',[AdminController::class,'deleteCourse']);
 $app->router->post('/deleteSection',[AdminController::class,'deleteSection']);
-
+$app->router->post('/deleteVideo',[AdminController::class,'deleteVideo']);
 $app->run();
