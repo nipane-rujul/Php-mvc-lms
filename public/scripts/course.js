@@ -128,11 +128,13 @@ $(document).ready(function () {
 
     // edit course button function
     function editCourse() {
-        $.post("editCourse", {
-            course: course['course']
-        }, function (res, status) {
-            window.location.href = "editcourse.php";
-        });
+        var cours = course['course'];
+        window.location.href = `editCourse?id=${cours['id']}`;
+        // $.post("editCourse", {
+        //     course: course['course']
+        // }, function (res, status) {
+        //     // window.location.href = "editcourse.php";
+        // });
     }
 
     // delete course button function

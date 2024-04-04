@@ -30,6 +30,8 @@ $app->router->get('/getCourses',[CourseController::class,'getCourses']);
 $app->router->get('/403',[CourseController::class,'error403']);
 $app->router->get('/CreateCourse',[AdminController::class,'CreateCourse']);
 $app->router->post('/CreateCourse',[AdminController::class,'CreateCourse']);
+$app->router->get('/editCourse',[AdminController::class,'editCourse']);
+$app->router->post('/editCourse',[AdminController::class,'editCourse']);
 $app->router->post('/getCourseDetails',[CourseController::class,'getCourseDetails']);
 $app->router->post('/deleteCourse',[AdminController::class,'deleteCourse']);
 $app->router->post('/addSection',[AdminController::class,'addSection']);

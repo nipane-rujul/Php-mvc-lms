@@ -7,7 +7,7 @@ use src\core\Application;
         <span id="alertMessage"></span>
         <button type="button" class="btn-close" aria-label="Close" onclick="closeAlert()"></button>
     </div>
-    <div class="d-flex align-items-center justify-content-between m-3">
+    <div class="d-flex align-items-center justify-content-between ">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -88,10 +88,8 @@ use src\core\Application;
         </div>
     </li>
 
-    <!-- <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li> -->
     <div class="video-item mb-2 d-flex align-items-center justify-content-between visually-hidden mt-2" id="admin-video">
         <div>
-            <!-- <i class="fas fa-video"></i> -->
             <a href="#" data-video-url="" class="video-link" data-section-id="" data-video-id="" data-video-title="">
 
             </a>

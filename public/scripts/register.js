@@ -10,6 +10,7 @@ function validateForm() {
     isValid = isValid && validatePassword();
     isValid = isValid && validateConfirmPassword();
     return isValid;
+   
 }
 
 function validateName() {
@@ -81,3 +82,10 @@ function isValidEmail(email) {
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
+$('#registrationForm').submit(function(event) {
+    if (!validateForm()) {
+        event.preventDefault(); // Prevent form submission
+    }
+});
+
+

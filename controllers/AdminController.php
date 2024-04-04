@@ -64,7 +64,6 @@ class AdminController extends Controller
     public function addSection()
     {
         $data = Application::$app->request->getBody();
-        
         $targetfile = File::encrypt($data['title']);
         // get course of section
         try {
@@ -96,7 +95,33 @@ class AdminController extends Controller
 
     public function editCourse()
     {
-        echo json_encode("add");
+        $data = Application::$app->request->getBody();
+
+        if(Application::$app->request->getMethod() == "POST"){
+            var_dump($data);
+            try{
+                var_dump($_GET);
+                Course::updateCourse(array(
+                    "id"  => $_GET["id"],
+                    "title" => $data["courseTitle"],
+                    "details" => $data["courseDes"],
+                ));
+                Application::$app->session->setFlash(["message" => "Course updated successfully", "type" =>"success"]);
+                Application::$app->response->redirect('');
+            }
+            catch(\Exception $e) {
+                $_SESSION["error"] = $e->getMessage();
+                header("Location: ". "../views/editcourse.php");
+            }
+        }
+        else{
+            $result = Course::getCourseById($data['id']); 
+            $course = $result->fetch_assoc();
+            $this->render('CreateCourse',["title"=>"EditCourse", "data" => $course]);
+        }
+        
+        // update the course in course table
+        
     }
 
     public function addVideo()
@@ -144,7 +169,7 @@ class AdminController extends Controller
             $title = $course['url'];
             File::deleteDir($_SERVER['DOCUMENT_ROOT'] . $title);
             Course::deleteCourse($data['id']);
-            Application::$app->response->redirect('');
+            // Application::$app->response->redirect('');
             // Application::$app->session->setFlash(["message"=>'Deleted Course Successfully', "type" => "success"]);
             echo json_encode(array("success" => true, "message" => "Deleted Course Successfully"));
         } catch (\Exception $e) {

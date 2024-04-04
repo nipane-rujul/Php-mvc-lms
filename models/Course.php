@@ -34,7 +34,7 @@ class Course{
         Application::$app->db->updateRecord("COURSE",array(
             "title"=> $data["title"],
             "details" => $data["details"],
-            "url" => $data["url"],
+            // "url" => $data["url"],
         ),
         array("id"=> $data["id"]));
     }
