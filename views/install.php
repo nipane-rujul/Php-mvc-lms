@@ -3,7 +3,7 @@
             <h4 class="card-title mt-3 text-center">Installation</h4>
             <p class="text-center">Welcome to the LMS Platform</p>
             <p class="text-center">Fill the Admin and Database Details to Get Started</p>
-            <form id="registrationForm" action="../controllers/installation.php" method="post" onsubmit="return validateForm()">
+            <form id="registrationForm" action="" method="post" onsubmit="return validateForm()">
                 <div class="form-group input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>

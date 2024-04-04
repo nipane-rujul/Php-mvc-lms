@@ -23,10 +23,11 @@ class Application{
             $installation = new Installation();
             $installation->install();
         }
-        // echo "her";
-        $this->db = Database::getInstance($config['db']);
-        self::$app->db->getConnection();
-        // echo "here";
+        else{
+            $this->db = Database::getInstance($config['db']);
+            self::$app->db->getConnection();
+        }
+
     }
 
     public function run(){

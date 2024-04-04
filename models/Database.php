@@ -18,12 +18,12 @@ class Database
         // get database details from config file 
             // echo "here";
             $this->server = $db['server'];
-            // $this->adminuser = $db['user'];
-            // $this->adminpass = $db['pass'];
+            $this->adminuser = $db['username'];
+            $this->adminpass = $db['password'];
             $this->dbUser = $db['dbuser'];
             $this->dbPassword = $db['dbpass'];
             $this->dbName = $db['dbname'];
-            // $this->email = $config['email'];
+            $this->email = $db['email'];
     }
      
     // creating instance of the db class 
@@ -38,8 +38,7 @@ class Database
     // function to create connection
     public function getConnection()
     {
-        // echo "here";
-        // echo $this->server . $this->dbUser . $this->dbPassword . $this->dbName;
+
         $this->conn = new \mysqli($this->server, $this->dbUser, $this->dbPassword, $this->dbName);
         if ($this->conn->connect_error) {
             // echo "here";

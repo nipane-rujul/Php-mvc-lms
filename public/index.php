@@ -5,11 +5,9 @@ use src\controllers\CourseController;
 use src\controllers\AdminController;
 use src\controllers\Installation;
 use src\core\Application;
-// echo "here";
 require_once __DIR__ . '/../vendor/autoload.php';
 $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
-// var_dump( $_ENV['DB_SERVER']);
 
 if($_ENV['DB_SERVER'] == null){
     $config = null;
@@ -24,16 +22,8 @@ else{
         ]
     ];
 }
-// echo "here";
 
 $app = new Application($config);
-
-// if($_ENV['DB_SERVER'] == null){
-//     $config = null;
-//     $installation = new Installation();
-//     $installation->install();
-// }
-
 $app->router->get('/installation',[Installation::class,'install']);
 $app->router->get('/',[CourseController::class,'home']);
 $app->router->get('/login',[AuthController::class,'login']);
