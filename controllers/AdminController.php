@@ -14,7 +14,7 @@ class AdminController extends Controller
     public function __construct()
     {
         if (!Application::$app->isAdmin()) {
-            Application::$app->response->redirect('_505');
+           Application::$app->response->redirect('403');
         }
     }
     public function CreateCourse()
@@ -50,7 +50,8 @@ class AdminController extends Controller
                     $target_dir
                 ));
                 Section::createSection($id, "Section 1", $this->sectionUrl);
-                Application::$app->response->redirect('course');
+                Application::$app->session->setFlash(["message"=>'Course Created Successfully', "type" => "success"]);
+                Application::$app->response->redirect('');
             } catch (\Exception $e) {
                 $_SESSION["error"] = $e->getMessage();
                 echo $e->getMessage();
@@ -63,8 +64,7 @@ class AdminController extends Controller
     public function addSection()
     {
         $data = Application::$app->request->getBody();
-        // echo json_encode($data);
-
+        
         $targetfile = File::encrypt($data['title']);
         // get course of section
         try {
@@ -87,6 +87,7 @@ class AdminController extends Controller
         // saving section in Database
         try {
             $id = Section::createSection($data["id"], $data["title"], $target_dir);
+            // Application::$app->session->setFlash(["message"=>'Added Section Successfully', "type" => "success"]);
             echo json_encode(array("status" => "success", "message" => "Section Created", "id" => $id));
         } catch (\Exception $e) {
             echo json_encode(array('error' => $e->getMessage()));
@@ -126,7 +127,6 @@ class AdminController extends Controller
                 exit;
             }
         }
-
         // save video details in database 
         try {
             $id = Video::createVideo($data['video-title'], $target_file, $data["sectionId"]);
@@ -144,6 +144,8 @@ class AdminController extends Controller
             $title = $course['url'];
             File::deleteDir($_SERVER['DOCUMENT_ROOT'] . $title);
             Course::deleteCourse($data['id']);
+            Application::$app->response->redirect('');
+            // Application::$app->session->setFlash(["message"=>'Deleted Course Successfully', "type" => "success"]);
             echo json_encode(array("success" => true, "message" => "Deleted Course Successfully"));
         } catch (\Exception $e) {
             echo json_encode(array("success" => false, "message" => $e->getMessage()));
@@ -185,8 +187,4 @@ class AdminController extends Controller
         }
     }
 
-    public function _505()
-    {
-        $this->render('_505');
-    }
 }

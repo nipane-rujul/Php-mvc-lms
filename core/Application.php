@@ -48,4 +48,10 @@ class Application{
         if($user['isAdmin'] == 'yes') return "Admin";
         return $user['username'];
     }
+
+    public function getMessage(){
+        $message = $this->session->getFlash();
+        $this->session->remove('flash');
+        return $message;
+    }
 }

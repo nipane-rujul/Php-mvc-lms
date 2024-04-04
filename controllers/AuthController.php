@@ -8,7 +8,9 @@ use src\core\Session;
 class AuthController extends Controller{
 
     public function __construct(){
-        // parent::$layout = 'auth';
+        if(Application::$app->isLogin()){
+            Application::$app->response->redirect('');
+        }
     }
 
     
@@ -26,6 +28,7 @@ class AuthController extends Controller{
             if($user->num_rows == 0){
                 $error = ['message' => 'Invalid username or password', 'data' => $data];
                 $this->setError($error);
+                // Application::$app->session->setFlash(["message"=>'Login failed', "type" => "danger"]);
                 Application::$app->response->redirect('login'); 
                 exit;
             }
@@ -33,6 +36,7 @@ class AuthController extends Controller{
                 // login the user by verifying password
                 $row = $user->fetch_assoc();
                 if(User::Login($row,$data["password"])){
+                    Application::$app->session->setFlash(["message"=>'Login Successfully', "type" => "success"]);
                     Application::$app->response->redirect('');
                 }
                 else{
@@ -94,6 +98,7 @@ class AuthController extends Controller{
                 );
                 try{
                     User::createUser($array);
+                    Application::$app->session->setFlash(["message"=>'User Created Successfully', "type" => "success"]);
                     Application::$app->response->redirect('login');
                 }
                 catch(\Exception $e){
@@ -112,6 +117,7 @@ class AuthController extends Controller{
         $this->layout = 'auth';
         Application::$app->session->remove('user');
         Application::$app->session->deleteSession();
+        Application::$app->session->setFlash(['message'=>'Logout succesfully', 'type'=>"success"]);
         Application::$app->response->redirect('login');
     }
 }

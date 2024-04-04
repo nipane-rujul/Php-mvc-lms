@@ -20,9 +20,10 @@
                         <input name="password" id="password" class="form-control" placeholder="Enter password" type="password" required>
                         <div id="passwordError" class="invalid-feedback"></div>
                     </div>
-                    <?php echo $message?>
+                    <div style="color: red;"><?php echo $message?></div>
+                    
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block"> Login </button>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </div>
                     <p class="text-center">Don't have an account?<a href="register">Register</a> </p>
                 </form>

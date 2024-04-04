@@ -7,12 +7,12 @@ class Session{
         session_start();
     }
 
-    public function setFlash(){
-        
+    public function setFlash($message){
+        $_SESSION['flash'] = $message;
     }
 
     public function getFlash(){
-
+        return $_SESSION['flash']?: false;
     }
 
     public function set($key, $value){

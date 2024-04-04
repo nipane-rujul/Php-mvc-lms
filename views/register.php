@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <?php echo $message?>
+                <div style="color: red;"><?php echo $message?></div>
                 <hr class="mb-2">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Register</button>
                 <p class="text-center">Have an account? <a href="login">Login</a> </p>

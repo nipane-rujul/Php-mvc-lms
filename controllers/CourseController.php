@@ -68,5 +68,11 @@ class CourseController extends Controller{
         ));
     }
 
+    public function error403()
+    {
+        $this->layout =  'auth';
+       $this->render('_403');
+    }
+
 
 }
