@@ -1,6 +1,8 @@
 <?php
 
 namespace src\core;
+
+use src\controllers\Installation;
 use src\models\Database;
 
 class Application{
@@ -11,15 +13,20 @@ class Application{
     public Database $db;
     public static Application $app;
     public Session $session;
-    public function __construct($config){
- 
+    public function __construct($config = []){
         $this->router = new Router(); 
         $this->request = new Request();
         $this->response = new Response();
-        $this->db = Database::getInstance($config['db']);
         $this->session = new Session();
         self::$app = $this;
+        if(!$config){
+            $installation = new Installation();
+            $installation->install();
+        }
+        // echo "her";
+        $this->db = Database::getInstance($config['db']);
         self::$app->db->getConnection();
+        // echo "here";
     }
 
     public function run(){
