@@ -22,13 +22,15 @@ class AuthController extends Controller{
                 $user = User::getUser(array("username"=> $data["username"]));
             }
             catch(\Exception $e){
+                Application::$app->session->setFlash($e->getMessage());
+                Application::$app->response->redirect('login');
                 exit;
             }
             
             if($user->num_rows == 0){
                 $error = ['message' => 'Invalid username or password', 'data' => $data];
                 $this->setError($error);
-                // Application::$app->session->setFlash(["message"=>'Login failed', "type" => "danger"]);
+                Application::$app->session->setFlash(["message"=>'Login failed', "type" => "danger"]);
                 Application::$app->response->redirect('login'); 
                 exit;
             }
@@ -61,17 +63,11 @@ class AuthController extends Controller{
             
             try{
                 $userbyemail = User::getUser(array("email"=> $data['email']));
-            }
-            catch(\Exception $e){
-                // header('Location: '. "../views/Login.php");
-                // $_SESSION['error'] = $e->getMessage();
-            }
-            try{
                 $userbyname = User::getUser(array("username"=> $data['username']));
             }
             catch(\Exception $e){
-                // header('Location: '. "../views/Login.php");
-                // $_SESSION['error'] = $e->getMessage();
+                Application::$app->session->setFlash($e->getMessage());
+                Application::$app->response->redirect('register');
             }
             if ($userbyname->num_rows > 0) {
                 $error = ['message' => 'Username already exists', 'data' => $data];
@@ -102,8 +98,8 @@ class AuthController extends Controller{
                     Application::$app->response->redirect('login');
                 }
                 catch(\Exception $e){
-                    $_SESSION['error'] = $e->getMessage();
-                    // header('Location: '. "../views/Login.php");
+                Application::$app->session->setFlash($e->getMessage());
+                Application::$app->response->redirect('register');
                 }
             }
         }

@@ -30,7 +30,8 @@ class AdminController extends Controller
             try {
                 File::createDir($_SERVER['DOCUMENT_ROOT'] . $target_dir);
             } catch (\Exception $e) {
-                $_SESSION["error"] = $e->getMessage();
+                Application::$app->session->setFlash($e->getMessage());
+                Application::$app->response->redirect('CreateCourse');
                 exit;
             }
             // creating default section 
@@ -40,6 +41,8 @@ class AdminController extends Controller
                 File::createDir($_SERVER['DOCUMENT_ROOT'] . $sectiondir);
                 $this->sectionUrl = $sectiondir;
             } catch (\Exception $e) {
+                Application::$app->session->setFlash($e->getMessage());
+                Application::$app->response->redirect('CreateCourse');
                 exit;
             }
             try {
@@ -53,8 +56,9 @@ class AdminController extends Controller
                 Application::$app->session->setFlash(["message"=>'Course Created Successfully', "type" => "success"]);
                 Application::$app->response->redirect('');
             } catch (\Exception $e) {
-                $_SESSION["error"] = $e->getMessage();
-                echo $e->getMessage();
+                Application::$app->session->setFlash($e->getMessage());
+                Application::$app->response->redirect('CreateCourse');
+                exit;
             }
         } else {
 
@@ -86,7 +90,6 @@ class AdminController extends Controller
         // saving section in Database
         try {
             $id = Section::createSection($data["id"], $data["title"], $target_dir);
-            // Application::$app->session->setFlash(["message"=>'Added Section Successfully', "type" => "success"]);
             echo json_encode(array("status" => "success", "message" => "Section Created", "id" => $id));
         } catch (\Exception $e) {
             echo json_encode(array('error' => $e->getMessage()));
@@ -98,9 +101,9 @@ class AdminController extends Controller
         $data = Application::$app->request->getBody();
 
         if(Application::$app->request->getMethod() == "POST"){
-            var_dump($data);
+           
             try{
-                var_dump($_GET);
+            
                 Course::updateCourse(array(
                     "id"  => $_GET["id"],
                     "title" => $data["courseTitle"],
@@ -110,8 +113,8 @@ class AdminController extends Controller
                 Application::$app->response->redirect('');
             }
             catch(\Exception $e) {
-                $_SESSION["error"] = $e->getMessage();
-                header("Location: ". "../views/editcourse.php");
+                Application::$app->session->setFlash($e->getMessage());
+                Application::$app->response->redirect('editCourse');
             }
         }
         else{
@@ -120,7 +123,6 @@ class AdminController extends Controller
             $this->render('CreateCourse',["title"=>"EditCourse", "data" => $course]);
         }
         
-        // update the course in course table
         
     }
 
@@ -169,8 +171,6 @@ class AdminController extends Controller
             $title = $course['url'];
             File::deleteDir($_SERVER['DOCUMENT_ROOT'] . $title);
             Course::deleteCourse($data['id']);
-            // Application::$app->response->redirect('');
-            // Application::$app->session->setFlash(["message"=>'Deleted Course Successfully', "type" => "success"]);
             echo json_encode(array("success" => true, "message" => "Deleted Course Successfully"));
         } catch (\Exception $e) {
             echo json_encode(array("success" => false, "message" => $e->getMessage()));
@@ -185,11 +185,6 @@ class AdminController extends Controller
             $result = Section::getSection($data['section_id'], $data['course_id']);
             $section = $result->fetch_assoc();
             File::deleteDir($_SERVER['DOCUMENT_ROOT'] . $section['section_url']);
-        } catch (\Exception $e) {
-            echo json_encode(array("error" => $e->getMessage()));
-        }
-        // delete section record from table 
-        try {
             Section::deleteSection(array("course_id" => $data['course_id'], "section_id" => $data['section_id']));
             echo json_encode(array("success" => true));
         } catch (\Exception $e) {

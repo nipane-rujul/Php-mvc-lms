@@ -46,4 +46,5 @@ class Controller{
         include_once "../views/$view.php";
         return ob_get_clean();
     }
+
 }

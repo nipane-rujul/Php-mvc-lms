@@ -20,7 +20,7 @@ use src\core\Application;
   </head>
 
 <body>
-    <div class="container p-2">
+    <div class="container-md p-2">
       <?php include_once "alert.php" ?>
     {{content}}
     </div>

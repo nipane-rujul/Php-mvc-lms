@@ -23,7 +23,7 @@ $(document).ready(function () {
                     newCard.attr("data-course-id", course['id']);
                     newCard.find(".btn-edit").attr("data-course-id", course['id']);
                     newCard.find(".btn-delete").attr("data-course-id", course['id']);
-                    newCard.find("img").attr("src", course['url']);
+                    // newCard.find("img").attr("src", course['url']);
                     newCard.find(".card-title").text(course['title']);
                     newCard.find(".card-text").text(course['details']);
                     newCard.find("a").attr("href", "course?id=" + course['id']);

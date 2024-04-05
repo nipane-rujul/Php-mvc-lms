@@ -34,6 +34,7 @@ $app->router->post('/register',[AuthController::class,'register']);
 $app->router->get('/course',[CourseController::class,'course']);
 $app->router->get('/getCourses',[CourseController::class,'getCourses']);
 $app->router->get('/403',[CourseController::class,'error403']);
+$app->router->get('/404',[CourseController::class,'error404']);
 $app->router->get('/CreateCourse',[AdminController::class,'CreateCourse']);
 $app->router->post('/CreateCourse',[AdminController::class,'CreateCourse']);
 $app->router->get('/editCourse',[AdminController::class,'editCourse']);

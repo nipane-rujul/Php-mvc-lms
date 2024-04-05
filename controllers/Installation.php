@@ -10,7 +10,6 @@ class Installation extends Controller{
     public function install(){
         if(Application::$app->request->getMethod() == "POST"){
             $data = Application::$app->request->getBody();
-        
             $user = $data['username'];
             $password = $data['password'];
             $email = $data['email'];

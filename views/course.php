@@ -1,5 +1,6 @@
 <?php 
 use src\core\Application;
+
 ?>
 
 <div class="container-fluid mt-2" style="min-height:84vh">
@@ -12,7 +13,7 @@ use src\core\Application;
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a id="course" href="#">Library</a></li>
-                <li class="breadcrumb-item active" aria-current="page" id="sec">Data</li>
+                <li class="breadcrumb-item active" aria-current="page" id="sec"></li>
             </ol>
         </nav>
         <?php if (Application::$app->isAdmin()) : ?>
@@ -35,8 +36,9 @@ use src\core\Application;
                 <ul class="list-unstyled ps-0" id="sectionContainer">
 
                 </ul>
+                <?php if (Application::$app->isAdmin()) : ?>
                     <button class="btn btn-outline-primary rounded mt-3 mb-2 float-end" data-bs-toggle="modal" data-bs-target="#addSectionModal">Add New Section</button>
-            
+            <?php endif;?>
             </div>
         </div>
         <div class="rounded-3 border shadow-sm">

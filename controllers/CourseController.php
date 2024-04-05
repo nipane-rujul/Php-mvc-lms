@@ -22,7 +22,7 @@ class CourseController extends Controller{
     }
 
     public function course(){
-        $this->render('course');
+        $this->render('course',["style => course.css"]);
     }
 
     public function getCourses(){
@@ -71,8 +71,12 @@ class CourseController extends Controller{
     public function error403()
     {
         $this->layout =  'auth';
-       $this->render('_403');
+       $this->render('_403',['style'=>'404.css','title'=>'Access Error']);
     }
 
+    public function error404(){
+        $this->layout = 'auth';
+        $this->render('_404',['style'=>'404.css','title'=>"Not Found"]);
+    }
 
 }

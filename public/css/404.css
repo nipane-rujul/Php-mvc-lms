@@ -1,0 +1,11 @@
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-message {
+    font-size: 48px;
+    font-weight: bold;
+}

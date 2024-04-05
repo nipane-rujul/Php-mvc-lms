@@ -59,6 +59,6 @@
     </div>
 
 
-    <script src="../scripts/admin.js">
+    <script src="scripts/admin.js">
 
     </script>
