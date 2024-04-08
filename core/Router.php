@@ -8,16 +8,19 @@ class Router{
 
     protected $routes = [];
 
+    // storing get routes 
     public function get($route, $controller)
     {
         $this->routes['GET'][$route] = $controller;
     }
 
+    // storing post routes  
     public function post($route, $controller)
     {
         $this->routes['POST'][$route] = $controller;
     }
 
+    // calling controller method of particular route 
     public function disPatch($method,$path){
         $callback = $this->routes[$method][$path] ?? false;
         if(!$callback){
@@ -32,26 +35,6 @@ class Router{
         return call_user_func($callback);
         
     }
-
-    
-    public function renderView($view, $params = []){
-        include_once "../views/$view.php";
-    }
-
-    protected function layoutContent(){
-        // $layout = Application::$app->controller->layout;
-        ob_start();
-        // include_once Application::$ROOT_DIR."/views/layouts/$layout.php";
-        return ob_get_clean();
-    }
-
-    protected function renderOnlyView($view, $params){
-        foreach($params as $key=>$value){
-            $$key = $value;
-        }
-        ob_start();
-        include_once "../views/$view.php";
-        return ob_get_clean();
-    }
+  
 
 }

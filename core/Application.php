@@ -8,12 +8,12 @@ use src\models\Database;
 class Application{
     public Router $router;
     public Request $request;
-
     public Response $response;
     public Database $db;
     public static Application $app;
     public Session $session;
     public function __construct($config = []){
+        // initializing the necessary classes 
         $this->router = new Router(); 
         $this->request = new Request();
         $this->response = new Response();

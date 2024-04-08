@@ -14,7 +14,7 @@ use src\core\Application;
         <h1 class="mb-3 h2">Welcome to the Learning Platform</h1>
         <p class="mb-3">Best & free guide of responsive web design</p>
         <?php if (Application::$app->isAdmin()) : ?>
-        <a class="btn btn-primary m-2" href="/CreateCourse" role="button" rel="nofollow" data-mdb-ripple-init target="_blank">Create Course</a>
+        <a class="btn btn-primary m-2" href="/CreateCourse" role="button" rel="nofollow" data-mdb-ripple-init>Create Course</a>
         <?php endif;?>
       </div>
       <!-- Jumbotron -->

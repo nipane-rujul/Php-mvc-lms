@@ -51,7 +51,7 @@ $(document).ready(function () {
                     console.log(error);
                 })
 
-            $(this).closest('.col-md-4').remove();
+            $(this).closest('.col-md-6').remove();
         }
     });
 
@@ -59,17 +59,7 @@ $(document).ready(function () {
     $(document).on("click", ".btn-edit", function (e) {
         e.preventDefault();
         var course_id = $(this).data('course-id');
-        console.log(course_id);
-        let course = courses.filter(course => course["id"] == course_id);
-        console.log(course);
-        
-        $.post("editcourse", {
-            course: course[0]
-        }, function (res, status) {
-
-            window.location.href = "editcourse.php";
-        });
-
+        window.location.href = `editCourse?id=${course_id}`;
     });
 });
 

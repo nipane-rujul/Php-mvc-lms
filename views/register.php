@@ -1,3 +1,7 @@
+<?php
+// var_dump($error);
+?>
+
 <div class="container mt-4" style="min-height:90vh">
     <div class="py-3 text-center">
         <h2>Welcome to Learning Management System</h2>
@@ -7,7 +11,7 @@
     <div class="row justify-content-center">
         <div class="col-md-7 border shadow-sm">
             <h4 class="my-2 text-center">Enter User Details</h4>
-            <form id="registrationForm" action="/register" method="post" onsubmit="return validateForm()">
+            <form id="registrationForm" action="" method="post">
                 <div class="mb-3">
                     <label for="username">Username<span class="text-muted">*</span></label>
                     <div class="input-group">

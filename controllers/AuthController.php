@@ -8,6 +8,7 @@ use src\core\Session;
 class AuthController extends Controller{
 
     public function __construct(){
+        // check user for login 
         if(Application::$app->isLogin()){
             Application::$app->response->redirect('');
         }
@@ -15,7 +16,7 @@ class AuthController extends Controller{
 
     
     public function login(){
-
+        
         if(Application::$app->request->getMethod() == 'POST'){
             $data = Application::$app->request->getBody();
             try{
@@ -48,18 +49,21 @@ class AuthController extends Controller{
                 }
                 
             }
-            // echo "hello";
         }
         else{
             $this->layout = 'auth';
-            $this->render('login',['style' => 'login.css', 'title' => "Login"]);
+            $this->render('login',[ 'title' => "Login"]);
         }
     }
 
     public function register(){
-
+        
         if(Application::$app->request->getMethod() == 'POST'){
             $data = Application::$app->request->getBody();
+            if(!$this->validate($data)){
+                Application::$app->response->redirect('register');   
+                exit;
+            }
             
             try{
                 $userbyemail = User::getUser(array("email"=> $data['email']));
@@ -105,7 +109,7 @@ class AuthController extends Controller{
         }
         else{
             $this->layout = 'auth';
-            $this->render('register',['style' => 'login.css', "title" => "Register"]);
+            $this->render('register',["title" => "Register"]);
         }
     }
 

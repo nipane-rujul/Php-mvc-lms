@@ -12,6 +12,7 @@ class User{
         Application::$app->db->insertRecord("USER", $data);
     }
 
+    // login user 
     public static function Login($row, $password){
         if (password_verify($password, $row["password"])) {
             Application::$app->session->set('user', ['username' => $row['username'], 'userId' => $row['id'], 'isAdmin' => $row['isAdmin']]);

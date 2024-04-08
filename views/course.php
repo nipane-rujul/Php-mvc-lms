@@ -9,8 +9,8 @@ use src\core\Application;
         <button type="button" class="btn-close" aria-label="Close" onclick="closeAlert()"></button>
     </div>
     <div class="d-flex align-items-center justify-content-between ">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
+        <nav aria-label="breadcrumb" style="background-color: white;">
+            <ol class="breadcrumb" style="background-color: white;">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a id="course" href="#">Library</a></li>
                 <li class="breadcrumb-item active" aria-current="page" id="sec"></li>

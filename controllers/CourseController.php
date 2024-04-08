@@ -12,15 +12,18 @@ class CourseController extends Controller{
     public $videos = [];
 
     public function __construct(){
+        // check for user login 
         if(!Application::$app->isLogin()){
             Application::$app->response->redirect('login');
         }
     }
 
+    // rendering home page 
     public function home(){
         $this->render('home',["style" => 'home.css', "title" => "home"]);
     }
 
+    // rendering courese page 
     public function course(){
         $this->render('course',["style => course.css"]);
     }
@@ -68,15 +71,6 @@ class CourseController extends Controller{
         ));
     }
 
-    public function error403()
-    {
-        $this->layout =  'auth';
-       $this->render('_403',['style'=>'404.css','title'=>'Access Error']);
-    }
 
-    public function error404(){
-        $this->layout = 'auth';
-        $this->render('_404',['style'=>'404.css','title'=>"Not Found"]);
-    }
 
 }

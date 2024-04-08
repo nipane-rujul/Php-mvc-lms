@@ -5,11 +5,13 @@ namespace src\core;
 class Request
 {
 
+    // get url method 
     public function getMethod()
     {
         return $_SERVER['REQUEST_METHOD'];
     }
 
+    // get url 
     public function getPath()
     {
         $path = $_SERVER['REQUEST_URI'];
@@ -20,25 +22,21 @@ class Request
         return $path;
     }
 
-
+    // get form data 
     public function getBody()
     {
         $data = [];
-        // echo "here";
         if ($this->getMethod() == "GET") {
-            // var_dump($_GET);
             foreach ($_GET as $key => $value) {
                 
                 $data[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
         if ($this->getMethod() == "POST") {
-            // var_dump($_POST);
             foreach ($_POST as $key => $value) {
                 $data[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
-        // var_dump($data);
         return $data;
     }
 }

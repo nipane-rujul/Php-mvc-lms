@@ -2,8 +2,8 @@
 
 namespace src\core;
 class Response{
+    // redirecting to the page 
     public function redirect($path){
-        // echo "h";
         header('Location: '. "/$path");
     }
 }
